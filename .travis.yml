@@ -12,19 +12,19 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_EVENT_TYPE" == "push" ]; then
     docker build -t phpfpm7 .;
-    docker tag phpfpm7:latest m4rcu5/php-fpm7:stable;
+    docker tag phpfpm7:latest m4rcu5/php7-fpm:stable;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push m4rcu5/php-fpm7:stable;
+    docker push m4rcu5/php7-fpm:stable;
     fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_EVENT_TYPE" == "cron" ]; then
     docker build -t phpfpm7 .;
-    docker tag phpfpm7:latest m4rcu5/php-fpm7:latest;
+    docker tag phpfpm7:latest m4rcu5/php7-fpm:latest;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push m4rcu5/php-fpm7:latest;
+    docker push m4rcu5/php7-fpm:latest;
     fi
   - if [ "$TRAVIS_BRANCH" == "develop" ] && [ "$TRAVIS_EVENT_TYPE" != "pull_request" ]; then
     docker build -t phpfpm7 .;
-    docker tag phpfpm7:latest m4rcu5/php-fpm7:staging;
+    docker tag phpfpm7:latest m4rcu5/php7-fpm:staging;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push m4rcu5/php-fpm7:staging;
+    docker push m4rcu5/php7-fpm:staging;
     fi
