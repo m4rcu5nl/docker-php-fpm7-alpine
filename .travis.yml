@@ -1,0 +1,10 @@
+language: python
+python:
+  - 2.7
+services:
+  - docker
+install:
+  - docker build -t phpfpm7 .
+  - docker run -d --name phpfpm7 phpfpm7:latest
+script:
+  - docker ps | grep -q phpfpm7
