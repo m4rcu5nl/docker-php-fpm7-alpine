@@ -9,3 +9,10 @@ install:
   - docker run -d --name phpfpm7 phpfpm7:latest
 script:
   - docker ps | grep -q phpfpm7
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "develop" ] && [ "$TRAVIS_EVENT_TYPE" != "pull_request" ]; then
+    docker build -t phpfpm7 .;
+    docker tag phpfpm7:latest m4rcu5/php-fpm7:staging;
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push m4rcu5/php-fpm7:staging;
+    fi
